@@ -461,7 +461,13 @@ var userRouter = router2;
 var app = express();
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.status(200).json({
+    success : true,
+    message : "Welcome to DevPulse",
+    endpoints : {
+      issue : "/api/issues"
+    }
+  })
 });
 app.use("/api/auth", userRouter);
 app.use("/api/issues", IssueRouter);
