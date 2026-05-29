@@ -1,11 +1,12 @@
-import config from "../config/indexConfig";
-import { pool } from "../db/indexDB";
+
 import type { IUser } from "./user.interface";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { pool } from "../../db/indexDB";
+import config from "../../config/indexConfig";
 
 const signUpUserIntoDB = async(PayLoad : IUser)=>{
-    const {name,email,password,role} = PayLoad;
+    const {name,email,password,role="contributor"} = PayLoad;
 
     const hashPassword = await bcrypt.hash(password,10)
     // console.log(hashPassword)
@@ -43,11 +44,7 @@ const logInUserIntoDB = async(PayLoad : {email:string,password:string})=>{
         // console.log(" hoy nai")
         throw new Error("Invalid Credentials")
     }
-    // console.log(user)
 
-    // if a user came here that means he pass all the test now we have to make token
-
-    // generate token
 
     const jwtPayLoad = {
         id : user.id,

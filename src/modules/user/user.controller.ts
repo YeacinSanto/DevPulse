@@ -1,11 +1,25 @@
 import type { Request, Response } from "express"
 import { UserService } from "./user.service"
+import { USER_ROLE } from "../../types/typeIndex"
 
 
 const signUpUser = async(req : Request,res :Response)=>{
     // console.log(req.body)
     try {
+
+        const {type} = req.body
+        
+        if(type != USER_ROLE.contributor || type !=USER_ROLE.maintainer){
+              return res.status(400).json({
+                success : false,
+                message : "Invalid Role"
+              })
+            }
+
+
         const result = await UserService.signUpUserIntoDB(req.body)
+        
+
         res.status(201).json({
             success : true,
             message : "User Registered Successfully",

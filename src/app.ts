@@ -1,6 +1,7 @@
 
 import express, { type Application, type Request, type Response } from "express"
-import { userRouter } from "./user/user.router"
+import { IssueRouter } from "./modules/issue/issue.router"
+import { userRouter } from "./modules/user/user.router"
 
 
 const app : Application = express()
@@ -12,6 +13,7 @@ app.get('/', (req : Request, res : Response) => {
 })
 
 app.use("/api/auth",userRouter)
+app.use("/api/issues", IssueRouter)
 
 
 
