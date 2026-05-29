@@ -9,7 +9,13 @@ const app : Application = express()
 app.use(express.json())
 
 app.get('/', (req : Request, res : Response) => {
-  res.send('Hello World!')
+  res.status(200).json({
+    success : true,
+    message : "Welcome to DevPulse",
+    endpoints : {
+      issue : "/api/issues"
+    }
+  })
 })
 
 app.use("/api/auth",userRouter)
