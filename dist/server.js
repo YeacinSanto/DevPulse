@@ -458,16 +458,21 @@ router2.post("/login", userController.loginUser);
 var userRouter = router2;
 
 // src/app.ts
+import cors from "cors";
 var app = express();
 app.use(express.json());
+var corseOptions = {
+  origin: "https://https://dev-pulse-hazel.vercel.app/"
+};
+app.use(cors(corseOptions));
 app.get("/", (req, res) => {
   res.status(200).json({
-    success : true,
-    message : "Welcome to DevPulse",
-    endpoints : {
-      issue : "/api/issues"
+    success: true,
+    message: "Welcome to DevPulse",
+    endpoints: {
+      issue: "/api/issues"
     }
-  })
+  });
 });
 app.use("/api/auth", userRouter);
 app.use("/api/issues", IssueRouter);
